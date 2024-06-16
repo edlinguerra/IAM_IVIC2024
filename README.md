@@ -49,11 +49,11 @@ Se utilizará el lenguaje de programación R, conocido por su capacidad para man
     Profesor Titular A\
     Escuela Nacional de Estudios Superiores Unidad Mérida\
     Universidad Nacional Autónoma de México\
-    [Enlace a publicación](https://doi.org/10.1002/9781118445112.stat07841)
+    [EMA: Estadística Multivariada Aplicada](https://edlinguerra.quarto.pub/ema/)
 
 ## Contacto
 
-Para más información, puedes contactar al Dr. Edlin José Guerra Castro a través del correo electrónico: [correo\@example.com](mailto:correo@example.com).
+Para más información, puedes contactar al Dr. Edlin José Guerra Castro a través del correo electrónico: [edlin.guerra\@enesmerida.unam.mx](mailto:edlin.guerra@enesmerida.unam.mx).
 
 ------------------------------------------------------------------------
 
