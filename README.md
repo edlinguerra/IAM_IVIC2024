@@ -36,7 +36,9 @@ Se espera que los estudiantes realicen y entreguen cuatro prácticas que conform
 
 Se utilizará el lenguaje de programación R, conocido por su capacidad para manejar y analizar grandes conjuntos de datos a través de comandos sencillos y repetibles. Los estudiantes aprenderán a manipular objetos y generar representaciones tanto gráficas como numéricas de los datos analizados.
 
-## Bibliografía
+## Referencias bibliográficas
+
+Como referencia principal de este curso recomiendo la guía en línea de estudio [EMA: Estadística Multivariada Aplicada](https://edlinguerra.quarto.pub/ema/) de Edlin Guerra-Castro, Maite Mascaró y Juan J. Cruz-Motta. Adicionalmente se recomienda consultar los siguientes documentos:
 
 1.  Anderson, M.J. (2017). *Permutational multivariate analysis of variance (PERMANOVA)*. En **Wiley StatsRef: Statistics Reference Online**. <doi:10.1002/9781118445112.stat07841>
 2.  Borcard, D., Gillet F., Legendre, P. (2012). *Numerical ecology with R*. New York: Springer.
@@ -49,7 +51,6 @@ Se utilizará el lenguaje de programación R, conocido por su capacidad para man
     Profesor Titular A\
     Escuela Nacional de Estudios Superiores Unidad Mérida\
     Universidad Nacional Autónoma de México\
-    [EMA: Estadística Multivariada Aplicada](https://edlinguerra.quarto.pub/ema/)
 
 ## Contacto
 
