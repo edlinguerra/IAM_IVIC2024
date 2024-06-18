@@ -16,7 +16,7 @@ library(ggplot2)
 
 ## Trabajando con R
 
-El objetivo principal de este laboratorio es introducirlos a la exploración de datos y estadística descriptiva con [R](https://www.r-project.org/) y [RStudio](https://rstudio.com/), las herramientas computacionales que utilizaremos a lo largo del semestre para aprender a aplicar los conceptos más importantes de *Estadística Aplicada I*, pero en especial, para aprender a procesar y analizar datos reales.
+El objetivo principal de este laboratorio es introducirlos a la exploración de datos y estadística descriptiva con [R](https://www.r-project.org/) y [RStudio](https://rstudio.com/), las herramientas computacionales que utilizaremos a lo largo de este curso para aprender a aplicar los conceptos más importantes de *Estadística Multivariada Aplicada a Ciencias Ambientales*, pero en especial, para aprender a procesar y analizar datos reales.
 
 El programa [R](https://www.r-project.org/), sus versiones actualizadas y todos los paquetes con funciones, asi como otra información relevante se encuentre en los repositorios de R conocidos como **CRAN** (Comprehensive R Archive Network). Los distintos servidores distribuidos en todo el mundo, conforman el CRAN y son conocidos como los **CRAN mirrors** (de espejo). Para descargar los paquetes requieres antes escoger un **CRAN mirror**, y la función que te permite escogerlo de una lista que aparece en la consola es `chooseCRANmirror`. Alternativamente, se pueden descargar paquetes desde otros repositorios, uno muy popular y que estaremos usando en esta asignatura es [GitHub](https://github.com/).
 
@@ -312,6 +312,9 @@ d)  ¿Con base en las dimensiones, se puede inferir cuántas especies hay en la 
 e)  ¿Son similares las magnitudes de abundancia de las especies en cada localidad?
 f)  Considerando que esta es una matriz pequeña ¿puede apreciar algún patrón biológico viendo solo la tabla?
 
+```{=html}
+<!-- -->
+```
 2.  Genere una tabla de nombre "uni" que describa las propiedades UNIVARIADAS bióticas de las localidades, incluya: la riqueza de especies, la abundancia de individuos y el índice de diversidad de Simpson. Le recomiendo buscar ayuda sobre las funciones `specnumber`, `diversity`. Acá un **script** que le ayudará a avanzar rápido. Nota: ninguna de estas funciones filtran texto
 
 ```{r, eval=FALSE}
@@ -373,6 +376,9 @@ g)  Aparentemente no hay un patrón biológico según el gradiente, sin embargo,
 
 1.  Hemos identificado que nuestra matriz tiene 6 muestras (localidades) y 10 especies. Además, no todas las especies están en todas las muestras, hay especies con abundancias muy elevadas y otras muy bajas. ¿qué representa esto para iniciar un análisis multivariado? Exploremos esto usando varios métodos. Sugiero leer el material de ayuda `vegdist` del paquete `vegan`, tipeando `??vegdist` en la cónsola. Para esta práctica compararemos el desempeño del índice Bray-Curtis y la distancia Euclideana.
 
+```{=html}
+<!-- -->
+```
 a)  Iniciemos con las distancias Euclideanas. Use la función `vegdist`, y llame al resultado *euc*.
 
 ```{r, include=FALSE}
