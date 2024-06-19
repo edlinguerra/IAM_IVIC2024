@@ -5,7 +5,8 @@ author: "Prof. Edlin Guerra Castro"
 format:
    pdf:
      code-link: true
-date: "`r format(Sys.time(), '%d/%m/%Y')`"
+date: last-modified
+date-format: long
 editor: visual
 crossref: 
   fig-title: Figura
@@ -71,7 +72,15 @@ f)  Considerando la escala de magnitud de las variables, qué tipo de pretratami
 
 ```{r, include=FALSE}
 pairs(sed)
-sed1<-data.frame("log.THC"=log(sed["THC"]), "log.Cu" = log(sed["Cu"]),sed[2:6],sed[8:9])
+
+sed1<-data.frame("log.THC"=log(sed$THC),
+"log.Cu" = log(sed$Cu),
+"log.Ba" = log(sed$Ba),
+"log.Pb" = log(sed$Pb),
+"log.Ni" = log(sed$Ni),
+"log.Sr" = log(sed$Sr),
+sed[2:4])
+
 pairs(sed1)
 ```
 
