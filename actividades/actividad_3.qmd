@@ -317,15 +317,15 @@ scoresPCO$distancia <- as.factor(datos$`#dist`)
 PCO.ggplot <-
   ggplot(scoresPCO, aes(x = V1, y = V2, colour = distancia)) +
   geom_point(size = 3) +
-  ylab(expression(paste("PCO2"))) +
-  xlab(expression(atop(paste("PCO1"))))# Proyección del PCO
+  ylab("PCO2") +
+  xlab("PCO1")# Proyección del PCO
 
 PCO.ggplot #imprimir gráfico en la consola
 ```
 
 #### Construcción de un PCO con las funciones "enlatadas" cmdscale{stats}, pcoa{ape}, ordiplot{vegan} y biplot {stats}.
 
-a)  Aplique las funciones cmdscale sobre la matriz bray1. ¿Se obtiene la misma ordenación que aplicando manualmente el álgebra de matrices? Compare los Scores y el gráfico.
+a)  Aplique las funciones `cmdscale` sobre la matriz bray1. ¿Se obtiene la misma ordenación que aplicando manualmente el álgebra de matrices? Compare los *scores* y el gráfico.
 
 ```{r, eval = FALSE}
 PCO.r <- cmdscale(bray1, k = (nrow(r.c) - 1), eig = TRUE)
@@ -340,12 +340,12 @@ library(ape)
 PCO.ape <- pcoa(bray1)
 ```
 
-c)  Ahora tratemos de hacer un biplot, proyectando las especies responsables. USe la función `biplot` para tal fin
+c)  Ahora tratemos de hacer un biplot, proyectando las especies responsables. Use la función `biplot` para tal fin
 
 ```{r, eval = FALSE}
 biplot(
   PCO.ape,
-  Y = r.c,
+  Y = r.c.sub,
   plot.axes = c(1, 2),
   dir.axis1 = 1,
   dir.axis2 = 1,
@@ -386,7 +386,7 @@ biplot(PCO.ape, Y=r.c[,sp],
        main="PCO pcoa{ape} 2- Macrofauna")
 ```
 
-i)  Ya vimos varias de las alternativas para proyectar nuestro PCO, todas mejorables desde el punto de vista estético, para ello hay que ver los atributos de las funciones que decidamos utilizar. Lo más importante de todo es identificar si el PCO es una buena representación gráfica. ¿Cómo hacemos eso? Una forma (no laúnica) es explorando al objeto PCO.ape.
+i)  Ya vimos varias de las alternativas para proyectar nuestro PCO, todas mejorables desde el punto de vista estético, para ello hay que ver los atributos de las funciones que decidamos utilizar. Lo más importante de todo es identificar si el PCO es una buena representación gráfica. ¿Cómo hacemos eso? Una forma (no la única) es explorando al objeto PCO.ape.
 
 ```{r, eval = FALSE}
 PCO.ape$values$Relative_eig[1:2] # Autovalores del PCO1 y PCO2
@@ -400,13 +400,13 @@ sum(PCO.ape$values$Relative_eig[1:2] * 100)
 
 ### Parte 3. Escalamiento Muldimensional (MDS)
 
-a)  Inspeccione el archivo de ayuda de metaMDS, y ejecute el escalamiento. Acá se proponen estos scripts, pero usted puede mejorar el gráfico notablemente explorando las opciones gráficas de las función `plot`
+a)  Inspeccione el archivo de ayuda de `metaMDS`, y ejecute el escalamiento. Acá se proponen estos comandos, pero usted puede mejorar el gráfico notablemente explorando las opciones gráficas de las función `plot`
 
 ```{r, eval = FALSE}
 nMDS <- metaMDS(r.c,
                distance = "bray",
                k = 2,
-               trymax = 30)
+               trymax = 50)
 plot(nMDS, display = "sites")
 title(main = "MDS con metaMDS, Bray-Curtis macrofauna")
 mtext(text = paste("stress =", round(nMDS$stress, 3)), outer = FALSE)
@@ -417,7 +417,7 @@ plot(shp1)
 lines(shp1$x, shp1$yf, type = "S")
 ```
 
-b)  Ahora inspeccione el archivo de ayuda de monoMDS y ejecute un escalamiento métrico usando regresión lineal.
+b)  Ahora inspeccione el archivo de ayuda de `monoMDS` y ejecute un escalamiento métrico usando regresión lineal.
 
 ```{r, eval = FALSE}
 library(MASS)
@@ -437,11 +437,11 @@ plot(shp2)
 abline(a = -1.995, b = 8.13)
 ```
 
-c)  Usemos a nMDS y ggplot para generar un MDS con puntos identificados según el factor distancia
+c)  Usemos a nMDS y `ggplot` para generar un MDS con puntos identificados según el factor distancia
 
 ```{r, eval = FALSE}
 # Extraer coordenadas de cada muestra
-nMDS.ejes <- as.data.frame(nMDS$points)
+nMDS.ejes <- as.data.frame(lMDS$points)
 
 #Agregar el factor distancia a la tabla
 nMDS.ejes$distancia <- distancia
@@ -459,7 +459,7 @@ nMDS.plot +
   )+
   theme(axis.ticks = element_blank(), axis.text = element_blank())+
   ggtitle("nMDS con monoMDS, Bray-Curtis macrofauna",
-          subtitle = paste("stress =", round((nMDS$stress),3)))
+          subtitle = paste("stress =", round((lMDS$stress),3)))
 
 ```
 
@@ -467,22 +467,24 @@ d)  Compare todas las ordenaciones que ha generado de bray1, tanto los PCO, como
 
 #### Visualización de centroides
 
-El PCO no fue lo suficientemente flexible como para refrejar a bray1. Sin embargo, es una herramienta muy útil para poder estimar "semi" parámetros, como los centroides de los grupos. Usemos los scores generados con el análisis de matrices para estimar los centroides y proyectarlos.
+El PCO no fue lo suficientemente flexible como para reflejar a bray1. Sin embargo, es una herramienta muy útil para poder estimar "semi" parámetros, como los centroides de los grupos. Usemos los *scores* generados con el análisis de matrices para estimar los centroides y proyectarlos.
 
 a)  Usemos el paquete `dplyr` para manejar con mayor facilidad la data.frame scoresPCO. Lo primero es convertir esa data.frame a tabla con la función `as.tbl`
 
 ```{r, eval = FALSE}
+library(tibble)
 scoresPCO.tb <- as_tibble(scoresPCO)
 ```
 
-b)  Luego, se debe indintificar al factor distancia con la función "group_by". Esa identificación debe tener un nombre particular. Usemos el nombre scoresPCO.dist
+b)  Luego, se debe indentificar al factor distancia con la función "group_by". Esa identificación debe tener un nombre particular. Usemos el nombre scoresPCO.dist
 
 ```{r, eval = FALSE}
+library(dplyr)
 scoresPCO.dist <- group_by(scoresPCO.tb, distancia)
 
 ```
 
-c)  Generemos los promedios para todos los scores usando como agrupación al factor distancia. Llame a la salida `centroides`. Luego de aplicar el script trate de identificar las dimensiones de `centroides`. ¿Reconoce lo que se calculó?
+c)  Generemos los promedios para todos los *scores* usando como agrupación al factor distancia. Llame a la salida `centroides`. Luego de aplicar el script trate de identificar las dimensiones de `centroides`. ¿Reconoce lo que se calculó?
 
 ```{r, eval = FALSE}
 centroides <- scoresPCO.dist %>%
